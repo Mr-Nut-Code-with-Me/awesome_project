@@ -1,13 +1,13 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-  Home
+  {{ category.title }}
 {% endblock %}
 
 {% block content %}
   <!-- START ARTICLE -->
   {% for post in posts %}
-    <a href="{% url 'detailpage' post.category.slug post.slug %}">
+    <a href="{% url 'detailpage' post.category post.slug %}">
       <div class="card article">
         <div class="card-content">
           <div class="media">

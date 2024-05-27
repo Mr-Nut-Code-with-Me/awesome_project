@@ -10,6 +10,7 @@
       <div class="media">
         <div class="media-content has-text-centered">
           <p class="title article-title">{{ post.title }}</p>
+          <p class="small mb-4">Category: <a href="{% url "categorypage" post.category.slug %}"> {{ post.category }}</a></p>
           <div class="tags has-addons level-item">
             <span class="tag is-rounded is-info">{{ post.author }}</span>
             <span class="tag is-rounded">{{ post.created_at|date:'D d M Y' }}</span>
@@ -17,7 +18,7 @@
         </div>
       </div>
       <div class="content article-body">
-        <p>{{ post.body }}</p>
+        <p>{{ post.body|linebreaks }}</p>
       </div>
 
       <hr />
