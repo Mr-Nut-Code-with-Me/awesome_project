@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+{% block content %}
+  <div class="card article">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content has-text-centered">
+          <p class="title article-title">{{ post.title }}</p>
+          <div class="tags has-addons level-item">
+            <span class="tag is-rounded is-info">{{ post.author }}</span>
+            <span class="tag is-rounded">{{ post.created_at|date:'D d M Y' }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="content article-body">
+        <p>{{ post.body }}</p>
+      </div>
+
+      <hr />
+      <h2 class="is-4">
+        Comments
+      </h2>
+      <form method='POST' class="mb-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="field">
+            <div class="control">
+                <button class="button is-success">
+                    Submit
+                </button>
+            </div>
+        </div>
+      </form>
+      <hr>
+      {% for comment in post.comments.all %}
+        <article class = "media">
+          <div class="media-content">
+            <strong>
+              {{comment.name}}
+            </strong>
+            <small>
+              {{comment.created_at|timesince}} ago
+            </small>
+            <br>
+            <div>
+              {{comment.body}}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

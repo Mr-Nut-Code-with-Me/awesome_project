@@ -7,21 +7,23 @@
 {% block content %}
   <!-- START ARTICLE -->
   {% for post in posts %}
-    <div class="card article">
-      <div class="card-content">
-        <div class="media">
-          <div class="media-content has-text-centered">
-            <p class="title article-title">{{ post.title }}</p>
-            <div class="tags has-addons level-item">
-              <span class="tag is-rounded is-info">{{ post.author }}</span>
-              <span class="tag is-rounded">{{ post.created_at|date:"D d M Y" }}</span>
+    <a href="{% url 'detailpage' post.slug %}">
+      <div class="card article">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content has-text-centered">
+              <p class="title article-title">{{ post.title }}</p>
+              <div class="tags has-addons level-item">
+                <span class="tag is-rounded is-info">{{ post.author }}</span>
+                <span class="tag is-rounded">{{ post.created_at|date:'D d M Y' }}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="content article-body">
-          <p>{{ post.intro }}</p>
+          <div class="content article-body">
+            <p>{{ post.intro }}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   {% endfor %}
 {% endblock %}
