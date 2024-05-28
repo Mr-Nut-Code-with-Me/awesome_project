@@ -7,6 +7,9 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+    def get_absolute_url(self):
+        return '/%s/' % self.slug
+
     class Meta:
         ordering = ('title', )
         verbose_name_plural = "Categories"
@@ -30,10 +33,13 @@ class Post(models.Model):
     author = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices = CHOICES_STATUS, default = ACTIVE)
+    image = models.ImageField(upload_to="uploads/", blank=True, null=True)
 
     def __str__(self):
         return f"{self.title} by {self.author}"
 
+    def get_absolute_url(self):
+        return '/%s/%s/' % (self.category.slug, self.slug)
     class Meta:
         ordering = ('-created_at', )
 

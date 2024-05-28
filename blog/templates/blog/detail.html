@@ -8,6 +8,13 @@
   <div class="card article">
     <div class="card-content">
       <div class="media">
+        {% if post.image %}
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="{{ post.image.url }}" alt="Placeholder image" />
+          </figure>
+        </div>
+        {% endif %}
         <div class="media-content has-text-centered">
           <p class="title article-title">{{ post.title }}</p>
           <p class="small mb-4">Category: <a href="{% url "categorypage" post.category.slug %}"> {{ post.category }}</a></p>
