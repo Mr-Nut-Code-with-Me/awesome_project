@@ -13,6 +13,15 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+
+    ACTIVE = "active"
+    DRAFT = "draft"
+
+    CHOICES_STATUS = (
+        (ACTIVE, "Active"),
+        (DRAFT, "Draft")
+    )
+
     category = models.ForeignKey(Category, name="category", on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     slug = models.SlugField()
@@ -20,6 +29,7 @@ class Post(models.Model):
     body = models.TextField()
     author = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices = CHOICES_STATUS, default = ACTIVE)
 
     def __str__(self):
         return f"{self.title} by {self.author}"
